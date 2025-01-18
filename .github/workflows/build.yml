@@ -28,11 +28,17 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Install csstidy dependencies
+        run: |
+          cd sdk
+          ./scripts/feeds install csstidy
+          make package/feeds/luci/csstidy/compile -j$(nproc) V=sc
+
       - name: Add luci-theme-pxworld package
         run: |
           cd sdk/package
           git clone https://github.com/peditx/luci-theme-pxworld
-          cd .. 
+          cd ..
           echo "CONFIG_PACKAGE_luci-theme-pxworld=m" >> .config
 
       - name: Build luci-theme-pxworld
@@ -63,7 +69,7 @@ jobs:
           body: latest release of luci-theme-pxworld theme for OpenWrt.
           files: sdk/artifacts/luci-theme-pxworld_*.ipk
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # استفاده از GH_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Clean up temporary files
         run: |
