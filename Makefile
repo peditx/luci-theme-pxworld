@@ -13,6 +13,8 @@ LUCI_TITLE:=PXworld Theme by PeDitX
 LUCI_DEPENDS:=
 PKG_VERSION:=1.0.1
 PKG_RELEASE:=20250118
+URL:=http://t.me/peditx
+PKGARCH:=all
 
 define Package/luci-theme-$(THEME_NAME)/postinst
 #!/bin/sh
