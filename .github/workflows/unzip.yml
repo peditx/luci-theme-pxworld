@@ -7,6 +7,15 @@ on:
     paths:
       - 'luci-app-pxworld.zip'
   workflow_dispatch:
+    inputs:
+      zip_url:
+        description: 'آدرس فایل زیپ'
+        required: true
+        default: 'https://raw.githubusercontent.com/peditx/luci-theme-pxworld/refs/heads/main/luci-app-pxworld.zip'
+      branch:
+        description: 'برنچ مقصد'
+        required: true
+        default: 'main'
 
 jobs:
   unzip:
@@ -18,7 +27,7 @@ jobs:
 
     - name: Download luci-app-pxworld.zip
       run: |
-        curl -L -o luci-app-pxworld.zip https://raw.githubusercontent.com/peditx/luci-theme-pxworld/refs/heads/main/luci-app-pxworld.zip
+        curl -L -o luci-app-pxworld.zip ${{ github.event.inputs.zip_url }}
 
     - name: Unzip luci-app-pxworld.zip
       run: |
@@ -27,11 +36,11 @@ jobs:
 
     - name: Commit and push changes
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}  # استفاده از توکن ذخیره شده در Secrets
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add luci-app-pxworld/
         git commit -m "Unzipped luci-app-pxworld.zip"
         git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/peditx/luci-theme-pxworld.git
-        git push origin main
+        git push origin ${{ github.event.inputs.branch }}
