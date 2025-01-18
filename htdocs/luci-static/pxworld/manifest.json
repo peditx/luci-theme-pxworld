@@ -1,0 +1,22 @@
+{
+"name":"PXworld",
+"short_name":"PXworld",
+"description":"PXworld for OpenWRT by PeDitX.",
+"start_url":"/",
+"scope": "/",
+"orientation":"portrait",
+"prompt_message":"fast read PXworld",
+"icons":[
+{
+"src":"img/apple-touch-icon.png",
+"sizes":"144x144",
+"type":"image/png"
+},
+{
+"src":"logo.png",
+"sizes":"192x192",
+"type":"image/png"
+}
+],
+"display":"standalone"
+}
