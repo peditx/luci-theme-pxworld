@@ -1,21 +1,12 @@
-name: Unzip luci-app-pxworld.zip
+name: Download and Unzip luci-app-pxworld.zip
 
 on:
   push:
     branches:
-      - main
+      - main  # یا نام برنچ اصلی شما
     paths:
-      - 'luci-app-pxworld.zip'
-  workflow_dispatch:
-    inputs:
-      zip_file:
-        description: 'نام فایل زیپ'
-        required: true
-        default: 'luci-app-pxworld.zip'
-      branch:
-        description: 'برنچ مقصد'
-        required: true
-        default: 'main'
+      - 'luci-app-pxworld.zip'  # فقط زمانی اجرا شود که این فایل تغییر کند
+  workflow_dispatch:  # امکان اجرای دستی ورک‌فلو
 
 jobs:
   unzip:
@@ -25,18 +16,22 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Unzip file
+    - name: Download luci-app-pxworld.zip
+      run: |
+        curl -L -o luci-app-pxworld.zip https://raw.githubusercontent.com/peditx/luci-theme-pxworld/refs/heads/main/luci-app-pxworld.zip
+
+    - name: Unzip luci-app-pxworld.zip
       run: |
         mkdir -p luci-app-pxworld
-        unzip ${{ github.event.inputs.zip_file }} -d luci-app-pxworld/
+        unzip luci-app-pxworld.zip -d luci-app-pxworld/
 
     - name: Commit and push changes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # استفاده از توکن پیش‌فرض GitHub
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add luci-app-pxworld/
-        git commit -m "Unzipped ${{ github.event.inputs.zip_file }}"
+        git commit -m "Unzipped luci-app-pxworld.zip"
         git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/peditx/luci-theme-pxworld.git
-        git push origin ${{ github.event.inputs.branch }}
+        git push origin main
