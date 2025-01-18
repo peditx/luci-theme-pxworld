@@ -3,10 +3,10 @@ name: Download and Unzip luci-app-pxworld.zip
 on:
   push:
     branches:
-      - main  # یا نام برنچ اصلی شما
+      - main
     paths:
-      - 'luci-app-pxworld.zip'  # فقط زمانی اجرا شود که این فایل تغییر کند
-  workflow_dispatch:  # امکان اجرای دستی ورک‌فلو
+      - 'luci-app-pxworld.zip'
+  workflow_dispatch:
 
 jobs:
   unzip:
@@ -27,11 +27,11 @@ jobs:
 
     - name: Commit and push changes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # استفاده از توکن پیش‌فرض GitHub
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}  # استفاده از توکن ذخیره شده در Secrets
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add luci-app-pxworld/
         git commit -m "Unzipped luci-app-pxworld.zip"
-        git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/peditx/luci-theme-pxworld.git
+        git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/peditx/luci-theme-pxworld.git
         git push origin main
