@@ -11,7 +11,7 @@ THEME_TITLE:=PXworld Theme
 
 PKG_NAME:=luci-theme-$(THEME_NAME)
 LUCI_TITLE:=PXworld Theme by PeDitX
-LUCI_DEPENDS:=+luci-base
+LUCI_DEPENDS:=+libc
 PKG_VERSION:=1.0.1
 PKG_RELEASE:=20250118
 URL:=http://t.me/peditx
@@ -20,8 +20,10 @@ PKGARCH:=all
 define Package/luci-theme-$(THEME_NAME)
   SECTION:=luci
   CATEGORY:=LuCI
-  SUBMENU:=Themes
-  TITLE:=$(LUCI_TITLE)
+  SUBMENU:=4. Themes
+  DEPENDS:=+libc
+  TITLE:=LuCi Theme For OpenWrt - $(THEME_TITLE)
+  URL:=http://t.me/peditx
   PKGARCH:=all
 endef
 
