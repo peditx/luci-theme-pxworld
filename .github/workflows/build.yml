@@ -28,6 +28,11 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Clean build environment
+        run: |
+          cd sdk
+          make clean
+
       - name: Install csstidy dependencies
         run: |
           cd sdk
