@@ -33,12 +33,6 @@ jobs:
           cd sdk
           make clean
 
-      - name: Install csstidy dependencies
-        run: |
-          cd sdk
-          ./scripts/feeds install csstidy
-          make package/feeds/luci/csstidy/compile -j$(nproc) V=sc
-
       - name: Add luci-theme-pxworld package
         run: |
           cd sdk/package
