@@ -52,5 +52,5 @@ jobs:
           body: latest release of luci-theme-pxworld theme for OpenWrt.
           files: sdk/artifacts/luci-theme-pxworld_*.ipk
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           timestamp: ${{ github.run_id }}
