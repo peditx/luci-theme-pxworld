@@ -31,7 +31,7 @@ jobs:
       - name: Add luci-theme-pxworld package
         run: |
           cd sdk/package
-          git clone https://github.com/pxworld/luci-theme-pxworld
+          git clone https://github.com/peditx/luci-theme-pxworld
           cd .. 
           echo "CONFIG_PACKAGE_luci-theme-pxworld=m" >> .config
 
