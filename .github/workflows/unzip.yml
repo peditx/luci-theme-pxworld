@@ -1,0 +1,29 @@
+name: Unzip luci-app-pxworld.zip
+
+on:
+  push:
+    branches:
+      - main  # یا نام برنچ اصلی شما
+    paths:
+      - 'luci-app-pxworld.zip'  # فقط زمانی اجرا شود که این فایل تغییر کند
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Unzip luci-app-pxworld.zip
+      run: |
+        mkdir -p luci-app-pxworld
+        unzip luci-app-pxworld.zip -d luci-app-pxworld/
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add luci-app-pxworld/
+        git commit -m "Unzipped luci-app-pxworld.zip"
+        git push
