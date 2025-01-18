@@ -1,6 +1,7 @@
 name: Unzip luci-app-pxworld.zip
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  # یا نام برنچ اصلی شما
